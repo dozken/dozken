@@ -1,10 +1,19 @@
 ### dozken
 
-Over a decade of brewing potent software. Full-stack wizard, teamwork champion, and productivity enthusiast.
+Full-stack developer building software. Teamwork champion and productivity enthusiast.
 
-- I’m currently learning: Go, OCaml, Rust
-- Ask me about: Java, Typescript, web dev, Go
-- How to reach me: Discord dozken#3070
-- Fun fact: I once rode a real caml
+---
 
-I use NeoVim btw
+**Building** scalable applications and distributed systems with Java, TypeScript, and Go. Focused on clean architecture, performance, and developer experience.
+
+**Tech:** Java • TypeScript • Go • JavaScript • Node.js • React • Spring • Docker
+
+**Learning:** Go, Rust
+
+**Tools:** NeoVim • Linux/macOS • zsh
+
+**Contact:** [LinkedIn](https://linkedin.com/in/dozken) • [GitHub](https://github.com/dozken) • Discord: dozken#3070
+
+---
+
+*I use NeoVim btw*
