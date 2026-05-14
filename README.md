@@ -1,7 +1,9 @@
-### Dosmukhamed Zhanibekov
+### Dosmukhamed
 
-Building production systems and AI tooling. TypeScript · NestJS · React · Java — plus Rust and Go when curious.
+I build things that ship. Full-stack systems, AI orchestration backends, the occasional Rust experiment at 1am.
 
-15 years shipping software. Currently focused on agentic AI backends and full-stack platforms.
+TypeScript · NestJS · React · Java · Go · Rust
 
-Abu Dhabi, UAE · [linkedin.com/in/dozken](https://linkedin.com/in/dozken)
+15 years in. Still the best job.
+
+Abu Dhabi · [linkedin.com/in/dozken](https://linkedin.com/in/dozken)
