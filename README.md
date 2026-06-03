@@ -1,6 +1,4 @@
-### Dosmukhamed
-
-I build things that ship. Full-stack systems, AI orchestration backends, the occasional Rust experiment at 1am.
+I build things that ship
 
 TypeScript · NestJS · React · Java · Go · Rust
 
