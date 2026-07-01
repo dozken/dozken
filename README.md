@@ -27,6 +27,13 @@
                                     route-finder       BFS land routes across borders
                                     wunder             Wunder Predictorium
 
+                                    $ tokei --flagships
+                                    Python     ██████████ 55%
+                                    TypeScript ████████░░ 42%
+                                    Java       █░░░░░░░░░  2%
+                                    Rust       █░░░░░░░░░  1%
+                                    Go         █░░░░░░░░░ <1%
+
                                     $ contact --list
                                     linkedin   /in/dozken
                                     github     /dozken
