@@ -18,12 +18,12 @@
                                                tooling · a11y · distributed
 
                                     ─────────────────────────────────────
-                                    $ ls ~/projects --top
-                                    leptos-htmx        Leptos + HTMX, server-driven UI
-                                    ibkr-trader-core   Shariah-compliant IBKR bot
-                                    translate-ai-pdf   LLM multi-language PDF xlate
-                                    route-finder       BFS land routes across borders
-                                    wunder             Wunder Predictorium
+                                    $ ls ~/projects --picks
+                                    ibkr-trader-core      Shariah-compliant IBKR bot
+                                    thymeleaf_ls          Thymeleaf LSP, written in Rust
+                                    wunder                LOB prediction, quant comp
+                                    multy-tenant-go-app   Multi-tenant Go, DB per tenant
+                                    billing-engine        NestJS payments microservices
 
                                     $ tokei --flagships
                                     Python · TypeScript · Java · Rust · Go · Lua

@@ -4,25 +4,24 @@
 import { readFileSync, writeFileSync } from "node:fs";
 
 const USER = "dozken";
-const COUNT = 5;
 const INDENT = " ".repeat(36); // matches neofetch right column
 const README = "README.md";
 const token = process.env.GITHUB_TOKEN;
 
-// crisp hand-written blurbs; repos not listed fall back to auto-shorten
-const BLURB = {
-  "leptos-htmx": "Leptos + HTMX, server-driven UI",
+// curated picks, most-interesting first — hand-ordered, not star-ranked
+// (star-ranking surfaced a tutorial repo). name → one-line blurb.
+const PROJECTS = {
   "ibkr-trader-core": "Shariah-compliant IBKR bot",
-  "translate-ai-pdf": "LLM multi-language PDF xlate",
-  "route-finder": "BFS land routes across borders",
   "thymeleaf_ls": "Thymeleaf LSP, written in Rust",
+  "wunder": "LOB prediction, quant comp",
+  "multy-tenant-go-app": "Multi-tenant Go, DB per tenant",
+  "billing-engine": "NestJS payments microservices",
 };
 
-// repos the language bars are computed over — your polyglot flagships,
-// decoupled from the star-ranked project list so the mix stays representative
+// repos the language list is computed over — real work only, no tutorials
 const LANG_REPOS = [
-  "leptos-htmx", "ibkr-trader-core", "translate-ai-pdf", "route-finder",
-  "wunder", "thymeleaf_ls", "SwapMatch", "billing-engine", "multy-tenant-go-app",
+  "ibkr-trader-core", "thymeleaf_ls", "wunder", "multy-tenant-go-app",
+  "billing-engine", "route-finder", "SwapMatch", "translate-ai-pdf",
 ];
 const LANG_N = 6; // languages listed, ordered by bytes
 
@@ -41,24 +40,11 @@ const gh = async (path) => {
   return res.json();
 };
 
-const repos = await gh(`/users/${USER}/repos?sort=pushed&per_page=100`);
-const picked = repos
-  .filter((r) => !r.fork && !r.archived && r.description && r.name !== USER)
-  .sort((a, b) => b.stargazers_count - a.stargazers_count) // most-starred first
-  .slice(0, COUNT);
-
-if (picked.length === 0) throw new Error("no repos matched filter");
-
-// --- projects list ---
-const namew = Math.max(...picked.map((r) => r.name.length)) + 3;
-const short = (d) => {
-  let s = d.split(/\s+[·—–-]\s+|\.\s|,\s/)[0].trim();
-  if (s.length > 34) s = s.slice(0, 33).trimEnd() + "…";
-  return s;
-};
-const blurb = (r) => BLURB[r.name] ?? short(r.description);
-const projectLines = picked
-  .map((r) => `${INDENT}${r.name.padEnd(namew)}${blurb(r)}`)
+// --- projects list (curated order) ---
+const names = Object.keys(PROJECTS);
+const namew = Math.max(...names.map((n) => n.length)) + 3;
+const projectLines = names
+  .map((n) => `${INDENT}${n.padEnd(namew)}${PROJECTS[n]}`)
   .join("\n");
 
 // --- language bars, aggregated over the curated flagship set ---
@@ -82,7 +68,7 @@ const langLines = `${INDENT}${ranked.map(([k]) => k).join(" · ")}`;
 
 // --- splice both regions; [ ]* keeps the blank separator lines intact ---
 let readme = readFileSync(README, "utf8");
-const projRe = /(\$ ls ~\/projects --top\n)[\s\S]*?(\n[ ]*\$ tokei --flagships)/;
+const projRe = /(\$ ls ~\/projects --picks\n)[\s\S]*?(\n[ ]*\$ tokei --flagships)/;
 const langRe = /(\$ tokei --flagships\n)[\s\S]*?(\n[ ]*\$ contact --list)/;
 if (!projRe.test(readme)) throw new Error("projects anchors not found");
 if (!langRe.test(readme)) throw new Error("tokei anchors not found");
@@ -95,5 +81,5 @@ if (next === readme) {
   console.log("no change");
 } else {
   writeFileSync(README, next);
-  console.log(`updated: ${picked.length} repos, ${ranked.length} langs`);
+  console.log(`updated: ${names.length} repos, ${ranked.length} langs`);
 }
