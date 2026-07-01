@@ -14,8 +14,6 @@
                                                existed, then open it.
                                                If it's not mine, I fork it.
 
-                                    Stack      TypeScript · Go · Rust
-                                               Java · Python · Lua
                                     Focus      trading systems · LSP/DX
                                                tooling · a11y · distributed
 
