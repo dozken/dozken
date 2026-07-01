@@ -16,6 +16,7 @@ const PROJECTS = {
   "wunder": "LOB prediction, quant comp",
   "multy-tenant-go-app": "Multi-tenant Go, DB per tenant",
   "billing-engine": "NestJS payments microservices",
+  "translate-ai-pdf": "LLM multi-language PDF xlate",
 };
 
 // repos the language list is computed over — real work only, no tutorials
