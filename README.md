@@ -20,22 +20,17 @@
                                                tooling · a11y · distributed
 
                                     ─────────────────────────────────────
-                                    $ ls ~/projects --recent
-                                    ibkr-trader-core   Shariah-compliant IBKR trading bo…
-                                    translate-ai-pdf   AI-powered multi-language PDF tra…
-                                    route-finder       Spring Boot service that calculat…
+                                    $ ls ~/projects --top
+                                    leptos-htmx        Leptos + HTMX, server-driven UI
+                                    ibkr-trader-core   Shariah-compliant IBKR bot
+                                    translate-ai-pdf   LLM multi-language PDF xlate
+                                    route-finder       BFS land routes across borders
                                     wunder             Wunder Predictorium
-                                    SwapMatch          Currency swap marketplace
 
                                     $ contact --list
                                     linkedin   /in/dozken
                                     github     /dozken
 ```
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=dozken&show_icons=true&hide_border=true&theme=dark&count_private=true" height="150" alt="stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs?username=dozken&layout=compact&hide_border=true&theme=dark&langs_count=6" height="150" alt="top langs" />
-</p>
 
 [LinkedIn](https://linkedin.com/in/dozken) · [GitHub](https://github.com/dozken)
 

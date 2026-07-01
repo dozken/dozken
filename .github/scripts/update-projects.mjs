@@ -8,6 +8,15 @@ const INDENT = " ".repeat(36); // matches neofetch right column
 const README = "README.md";
 const token = process.env.GITHUB_TOKEN;
 
+// crisp hand-written blurbs; repos not listed fall back to auto-shorten
+const BLURB = {
+  "leptos-htmx": "Leptos + HTMX, server-driven UI",
+  "ibkr-trader-core": "Shariah-compliant IBKR bot",
+  "translate-ai-pdf": "LLM multi-language PDF xlate",
+  "route-finder": "BFS land routes across borders",
+  "thymeleaf_ls": "Thymeleaf LSP, written in Rust",
+};
+
 const res = await fetch(
   `https://api.github.com/users/${USER}/repos?sort=pushed&per_page=100`,
   {
@@ -23,6 +32,7 @@ if (!res.ok) throw new Error(`GitHub API ${res.status}: ${await res.text()}`);
 const repos = await res.json();
 const picked = repos
   .filter((r) => !r.fork && !r.archived && r.description && r.name !== USER)
+  .sort((a, b) => b.stargazers_count - a.stargazers_count) // most-starred first
   .slice(0, COUNT);
 
 if (picked.length === 0) throw new Error("no repos matched filter");
@@ -34,13 +44,14 @@ const short = (d) => {
   if (s.length > 34) s = s.slice(0, 33).trimEnd() + "…";
   return s;
 };
+const blurb = (r) => BLURB[r.name] ?? short(r.description);
 const lines = picked
-  .map((r) => `${INDENT}${r.name.padEnd(namew)}${short(r.description)}`)
+  .map((r) => `${INDENT}${r.name.padEnd(namew)}${blurb(r)}`)
   .join("\n");
 
 const readme = readFileSync(README, "utf8");
 // anchor on the prompt lines; [ ]* (not \s*) so the blank line before contact isn't swallowed
-const re = /(\$ ls ~\/projects --recent\n)[\s\S]*?(\n[ ]*\$ contact --list)/;
+const re = /(\$ ls ~\/projects --top\n)[\s\S]*?(\n[ ]*\$ contact --list)/;
 if (!re.test(readme)) throw new Error("anchors not found in README");
 
 const next = readme.replace(re, `$1${lines}\n$2`);
