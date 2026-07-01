@@ -6,7 +6,6 @@ import { readFileSync, writeFileSync } from "node:fs";
 const USER = "dozken";
 const COUNT = 5;
 const INDENT = " ".repeat(36); // matches neofetch right column
-const BARW = 10; // language bar width in chars
 const README = "README.md";
 const token = process.env.GITHUB_TOKEN;
 
@@ -25,7 +24,7 @@ const LANG_REPOS = [
   "leptos-htmx", "ibkr-trader-core", "translate-ai-pdf", "route-finder",
   "wunder", "thymeleaf_ls", "SwapMatch", "billing-engine", "multy-tenant-go-app",
 ];
-const LANG_N = 5; // languages shown in the bar chart (all forced in, min 1 block)
+const LANG_N = 6; // languages listed, ordered by bytes
 
 // vendored / generated / templating / non-code — excluded from the language mix
 const NOISE = /^(XSLT|Makefile|Dockerfile|Batchfile|Roff|Shell|HTML|CSS|SCSS|Mako|Smarty|Jinja|Tcl|JavaScript|Objective-C\+*|C\+\+)$/;
@@ -76,21 +75,10 @@ for (const name of LANG_REPOS) {
     totals[k] = (totals[k] || 0) + v;
   }
 }
-const grand = Object.values(totals).reduce((a, b) => a + b, 0);
 const ranked = Object.entries(totals)
   .sort((a, b) => b[1] - a[1])
-  .slice(0, LANG_N); // top-N by bytes, small langs kept as slivers
-const max = ranked[0]?.[1] || 1;
-const langw = Math.max(...ranked.map(([k]) => k.length)) + 1;
-const langLines = ranked
-  .map(([k, v]) => {
-    const pct = Math.round((v * 100) / grand);
-    const fill = Math.max(1, Math.round((v / max) * BARW)); // scale to leader
-    const bar = "█".repeat(fill) + "░".repeat(BARW - fill);
-    const label = pct < 1 ? "<1%" : `${pct}%`;
-    return `${INDENT}${k.padEnd(langw)}${bar} ${label.padStart(3)}`;
-  })
-  .join("\n");
+  .slice(0, LANG_N); // top-N by bytes
+const langLines = `${INDENT}${ranked.map(([k]) => k).join(" · ")}`;
 
 // --- splice both regions; [ ]* keeps the blank separator lines intact ---
 let readme = readFileSync(README, "utf8");
