@@ -27,7 +27,7 @@
                                     translate-ai-pdf      LLM multi-language PDF xlate
 
                                     $ tokei --flagships
-                                    Python · TypeScript · Java · Rust · Go · Lua
+                                    Python · TypeScript · Rust · Java · Go · Lua
 
                                     $ contact --list
                                     linkedin   /in/dozken
